@@ -2,18 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="33ad707f-75a4-4f75-a765-0155cb5d1f41" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/data/Aircarrier.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/data/Battleship.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/data/Patrolship.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/data/Ship.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/data/Submarine.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/GUIServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/Server.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/ServerClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/client/BattleshipClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Battleship.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Battleship.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Battleship/data/Aircarrier.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Battleship/data/Aircarrier.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Battleship/data/Battleship.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Battleship/data/Battleship.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Battleship/data/Patrolship.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Battleship/data/Patrolship.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Battleship/data/Ship.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Battleship/data/Ship.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Battleship/data/Submarine.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Battleship/data/Submarine.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Battleship/server/ServerClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Battleship/server/ServerClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/Aircarrier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/Aircarrier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/Battleship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/Battleship.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/Patrolship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/Patrolship.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/Ship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/Ship.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/Submarine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/Submarine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/ServerClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ServerClient.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -59,7 +62,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.GUIServer">
+    <configuration name="BattleshipClient" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="client.BattleshipClient" />
+      <module name="Battleship" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="client.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="GUIServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="server.GUIServer" />
       <module name="Battleship" />
@@ -73,8 +89,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.BattleshipClient" />
+      <item itemvalue="Application.GUIServer" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.BattleshipClient" />
         <item itemvalue="Application.GUIServer" />
       </list>
     </recent_temporary>
@@ -89,7 +110,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1593160352576</updated>
-      <workItem from="1593160353776" duration="6178000" />
+      <workItem from="1593160353776" duration="21864000" />
     </task>
     <servers />
   </component>

@@ -43,7 +43,7 @@ public class ServerClient implements Runnable {
             objectToPlayer2 = new ObjectOutputStream(player2.getOutputStream());
 
             objectFromPlayer1 = new ObjectInputStream(player1.getInputStream());
-            objectFromPlayer2 = new ObjectInputStream(player1.getInputStream());
+            objectFromPlayer2 = new ObjectInputStream(player2.getInputStream());
 
         }
         catch (IOException e){
@@ -54,25 +54,37 @@ public class ServerClient implements Runnable {
     @Override
     public void run() {
         try {
-            dataToPlayer1.writeUTF("Place boats");
-            dataToPlayer2.writeUTF("Place boats");
+            dataToPlayer1.writeInt(1);
+            dataToPlayer2.writeInt(2);
 
             player1ships = (ArrayList<Ship>) objectFromPlayer1.readObject();
             player2ships = (ArrayList<Ship>) objectFromPlayer2.readObject();
 
+            for(Ship ship : player1ships){
+                System.out.println(ship.getPosition());
+            }
+            for(Ship ship : player2ships){
+                System.out.println(ship.getPosition());
+            }
+
 
             while (true){
+                System.out.println("Waiting for point");
                 Point2D positionPlayer1 = (Point2D) objectFromPlayer1.readObject();
+                System.out.println("received");
+
+                System.out.println(positionPlayer1);
 
                 if(isHit(positionPlayer1, player2ships)){
                     if(hasWon(player2ships)){
-                        dataToPlayer1.writeUTF("Player 1 has won");
-                        dataToPlayer2.writeUTF("Player 1 has won");
+                        //dataToPlayer1.writeUTF("Player 1 has won");
+                        //dataToPlayer2.writeUTF("Player 1 has won");
                         break;
                     }
                 }
                 else{
                     dataToPlayer2.writeUTF("Pick a move");
+                    System.out.println("send pick move");
 
                     sendMove(objectToPlayer2, positionPlayer1);
 
@@ -113,6 +125,10 @@ public class ServerClient implements Runnable {
             }
             if(isRemoved){
                 ship.getPosition().remove(point2DtoRemove);
+                if(ship.getPosition().isEmpty()){
+                    list.remove(ship);
+                    shipDestroyedMessage(ship);
+                }
             }
         }
         return isRemoved;
@@ -127,5 +143,14 @@ public class ServerClient implements Runnable {
 
     private void sendMove(ObjectOutputStream objectOutputStream, Point2D position) throws IOException{
         objectOutputStream.writeObject(position);
+    }
+
+    private void shipDestroyedMessage(Ship ship){
+        try {
+            dataToPlayer1.writeUTF(ship.getName()+" destroyed");
+            dataToPlayer2.writeUTF(ship.getName()+" destroyed");
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 }
