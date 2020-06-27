@@ -52,7 +52,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.GUIServer">
+  <component name="RunManager" selected="Application.BattleshipClient">
     <configuration name="BattleshipClient" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="client.BattleshipClient" />
       <module name="Battleship" />

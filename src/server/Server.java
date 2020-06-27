@@ -2,6 +2,7 @@ package server;
 
 import javafx.application.Platform;
 
+import javax.xml.transform.sax.SAXSource;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -39,8 +40,12 @@ public class Server {
 
                         System.out.println("Connected p2");
 
+                        System.out.println("Sessionnumber: "+ sessionNumber);
+
 
                         new Thread(new ServerClient(player1, player2)).start();
+
+                        sessionNumber++;
 
                     } catch (IOException e) {
                         e.printStackTrace();

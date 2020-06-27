@@ -3,6 +3,7 @@ package client;
 import data.*;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Cell;
 import javafx.scene.control.Label;
@@ -20,6 +21,7 @@ import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class BattleshipClient extends Application {
@@ -46,6 +48,8 @@ public class BattleshipClient extends Application {
 
     Label labelTitle = new Label("Battleship");
     Label labelStatus = new Label("Test");
+    Label labelLastMove = new Label();
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -63,8 +67,12 @@ public class BattleshipClient extends Application {
         borderPane.setTop(labelTitle);
         borderPane.setCenter(gridPane);
         borderPane.setBottom(labelStatus);
+        borderPane.setRight(labelLastMove);
+        labelLastMove.setMinWidth(100);
+        BorderPane.setAlignment(labelLastMove, Pos.CENTER);
+        labelLastMove.setAlignment(Pos.CENTER);
 
-        Scene scene = new Scene(borderPane, 600,600);
+        Scene scene = new Scene(borderPane, 800,600);
         primaryStage.setTitle("BattleshipClient");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -110,12 +118,14 @@ public class BattleshipClient extends Application {
                     if(player == 1){
                         waitForPlayer();
                         sendMove();
+                        hitOrMiss();
                         receiveInfo();
                     }
                     else if(player == 2){
                         receiveInfo();
                         waitForPlayer();
                         sendMove();
+                        hitOrMiss();
                     }
                 }
 
@@ -128,6 +138,23 @@ public class BattleshipClient extends Application {
                 e.printStackTrace();
             }
         }).start();
+    }
+
+    private void hitOrMiss() throws IOException {
+        System.out.println("Waiting for hit or miss");
+        String text = dataInputStream.readUTF();
+        if(text.equals("hit")){
+            Point2D lastMove = pickedMoves.get(pickedMoves.size()-1);
+            System.out.println("Hit "+ lastMove);
+            Platform.runLater(()->cell[(int)lastMove.getX()][(int)lastMove.getY()].repaint("ff0000"));
+            //TODO make square red
+        }
+        else if(text.equals("miss")){
+            System.out.println("Missed");
+            //TODO make square yellow
+            Point2D lastMove = pickedMoves.get(pickedMoves.size()-1);
+            Platform.runLater(()->cell[(int)lastMove.getX()][(int)lastMove.getY()].repaint("ffff00"));
+        }
     }
 
     private void receiveInfo() throws IOException, ClassNotFoundException {
@@ -153,23 +180,18 @@ public class BattleshipClient extends Application {
     }
 
     private void receiveMove() throws IOException, ClassNotFoundException {
-        //Point2D point2D = (Point2D)objectInputStream.readObject();
-//        String text = dataInputStream.readUTF();
-//        if(text.equals("hit")){
-//            Platform.runLater(() -> cell[(int)point2D.getX()][(int)point2D.getY()].repaint());
-//        }
-//        else if(text.equals("miss")){
-//            Platform.runLater(() -> cell[(int)point2D.getX()][(int)point2D.getY()].repaint());
-//        }
+        Point2D point2D = (Point2D)objectInputStream.readObject();
+        Platform.runLater(()-> labelLastMove.setText("Last move from \nopponent:\n["+(int)point2D.getX()+","+(int)point2D.getY()+"]"));
 
     }
 
     private void sendMove() throws IOException {
+        System.out.println("Send move");
         objectOutputStream.writeObject(pickedMoves.get(pickedMoves.size()-1));
     }
 
     private void waitForPlayer() throws InterruptedException {
-        Platform.runLater(() -> labelStatus.setText("Pick a move"));
+        //Platform.runLater(() -> labelStatus.setText("Pick a move"));
         while (waiting){
             Thread.sleep(100);
         }
@@ -177,11 +199,49 @@ public class BattleshipClient extends Application {
     }
 
     private void generateBoats(){
-        ships.add(new Aircarrier(6,new Point2D.Double(
-                0,0),true));
-        ships.add(new Battleship(4,new Point2D.Double(5,1),true));
-        ships.add(new Submarine(3,new Point2D.Double(3,3),true));
-        ships.add(new Patrolship(2, new Point2D.Double(9,7),true));
+
+        final Random rng = new Random();
+        int random = rng.nextInt(5);
+        System.out.println("Random int: " + random);
+
+        switch (random){
+            case 0:
+                ships.add(new Aircarrier(6,new Point2D.Double(0,0),true));
+                ships.add(new Battleship(4,new Point2D.Double(5,1),true));
+                ships.add(new Submarine(3,new Point2D.Double(3,3),true));
+                ships.add(new Patrolship(2, new Point2D.Double(9,7),true));
+                break;
+            case 1:
+                ships.add(new Aircarrier(6,new Point2D.Double(9,4),true));
+                ships.add(new Battleship(4,new Point2D.Double(3,3),false));
+                ships.add(new Submarine(3,new Point2D.Double(6,7),true));
+                ships.add(new Patrolship(2,new Point2D.Double(7,0),false));
+                break;
+            case 2:
+                ships.add(new Aircarrier(6,new Point2D.Double(4,7),false));
+                ships.add(new Battleship(4,new Point2D.Double(3,4),false));
+                ships.add(new Submarine(3,new Point2D.Double(8,2),true));
+                ships.add(new Patrolship(2,new Point2D.Double(2,6),true));
+                break;
+            case 3:
+                ships.add(new Aircarrier(6,new Point2D.Double(5,2),true));
+                ships.add(new Battleship(4,new Point2D.Double(3,9),false));
+                ships.add(new Submarine(3,new Point2D.Double(2,2),true));
+                ships.add(new Patrolship(2,new Point2D.Double(7,5),true));
+                break;
+            case 4:
+                ships.add(new Aircarrier(6,new Point2D.Double(3,0),false));
+                ships.add(new Battleship(4,new Point2D.Double(3,5),true));
+                ships.add(new Submarine(3,new Point2D.Double(1,2),true));
+                ships.add(new Patrolship(2,new Point2D.Double(6,5),false));
+                break;
+            case 5:
+                ships.add(new Aircarrier(6,new Point2D.Double(1,3),true));
+                ships.add(new Battleship(4,new Point2D.Double(9,0),true));
+                ships.add(new Submarine(3,new Point2D.Double(3,2),false));
+                ships.add(new Patrolship(2,new Point2D.Double(5,5),false));
+                break;
+        }
     }
 
     private void drawShips(){
@@ -218,8 +278,14 @@ public class BattleshipClient extends Application {
             
         }
 
-        protected void repaint(){
-            //TODO hit or miss
+        protected void repaint(String text){
+            Rectangle rectangle = new Rectangle();
+            rectangle.setWidth(this.getWidth());
+            rectangle.setHeight(this.getHeight());
+            rectangle.setFill(Color.valueOf(text));
+
+            getChildren().add(rectangle);
+
         }
 
         protected void colorShip(){
