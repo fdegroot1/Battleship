@@ -93,6 +93,7 @@ public class BattleshipClient extends Application {
 
             objectInputStream = new ObjectInputStream(socket.getInputStream());
 
+            //1.2 Send ships to server
             objectOutputStream.writeObject(ships);
 
         } catch (UnknownHostException e) {
@@ -103,6 +104,7 @@ public class BattleshipClient extends Application {
 
         new Thread(() ->{
             try {
+                //1.1 Receive player id
                 player = dataInputStream.readInt();
                 if(player==1){
                     myturn = true;
@@ -110,21 +112,25 @@ public class BattleshipClient extends Application {
                 else {
                     myturn = false;
                 }
-                Platform.runLater(() -> labelStatus.setText("Player: "+player));
+                Platform.runLater(() -> labelTitle.setText("Player: "+player));
 
                 System.out.println("Play game");
 
                 while (continueGame){
                     if(player == 1){
                         waitForPlayer();
+                        //2.1 Send move to server
                         sendMove();
+                        //2.2 Hit or miss and opponent move and if won
                         hitOrMiss();
                         receiveInfo();
                     }
                     else if(player == 2){
                         receiveInfo();
                         waitForPlayer();
+                        //2.1 Send move to server
                         sendMove();
+                        //2.2 Hit or miss and opponent move and if won
                         hitOrMiss();
                     }
                 }
@@ -147,11 +153,9 @@ public class BattleshipClient extends Application {
             Point2D lastMove = pickedMoves.get(pickedMoves.size()-1);
             System.out.println("Hit "+ lastMove);
             Platform.runLater(()->cell[(int)lastMove.getX()][(int)lastMove.getY()].repaint("ff0000"));
-            //TODO make square red
         }
         else if(text.equals("miss")){
             System.out.println("Missed");
-            //TODO make square yellow
             Point2D lastMove = pickedMoves.get(pickedMoves.size()-1);
             Platform.runLater(()->cell[(int)lastMove.getX()][(int)lastMove.getY()].repaint("ffff00"));
         }
@@ -264,7 +268,6 @@ public class BattleshipClient extends Application {
         }
 
         private void handleMouseCLick(){
-            //TODO handle mouse click
             if(myturn){
                 if(!pickedMoves.contains(new Point2D.Double(position.getX(),position.getY()))){
                     pickedMoves.add(new Point2D.Double(position.getX(),position.getY()));

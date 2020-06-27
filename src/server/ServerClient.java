@@ -54,12 +54,15 @@ public class ServerClient implements Runnable {
     @Override
     public void run() {
         try {
+            //1.1 Let players know which player they are
             dataToPlayer1.writeInt(1);
             dataToPlayer2.writeInt(2);
 
+            //1.2 Receive ships from both players
             player1ships = (ArrayList<Ship>) objectFromPlayer1.readObject();
             player2ships = (ArrayList<Ship>) objectFromPlayer2.readObject();
 
+            //Print ships
             for(Ship ship : player1ships){
                 System.out.println(ship.getPosition());
             }
@@ -70,9 +73,11 @@ public class ServerClient implements Runnable {
 
             while (true){
                 System.out.println("Waiting for point");
+                //2.1 Receive move from player
                 Point2D positionPlayer1 = (Point2D) objectFromPlayer1.readObject();
                 System.out.println("Received "+positionPlayer1);
 
+                //2.2 Send hit or miss player turn and has won if won
                 if(isHit(positionPlayer1, player2ships)){
                     System.out.println("Hit");
                     dataToPlayer1.writeUTF("hit");
@@ -94,8 +99,10 @@ public class ServerClient implements Runnable {
 
                 }
 
+                //2.1 Receive move from player
                 Point2D positionPlayer2 = (Point2D) objectFromPlayer2.readObject();
 
+                //2.2 Send hit or miss player turn and has won if won
                 if(isHit(positionPlayer2, player1ships)){
                     dataToPlayer2.writeUTF("hit");
                     if(hasWon(player1ships)){
@@ -162,7 +169,7 @@ public class ServerClient implements Runnable {
 
     private void shipDestroyedMessage(Ship ship){
 //        try {
-            System.out.println("Destroyed");
+            System.out.println("Destroyed: "+ship.getName() );
             //dataToPlayer1.writeUTF(ship.getName()+" destroyed");
             //dataToPlayer2.writeUTF(ship.getName()+" destroyed");
 //        }catch (IOException e){
