@@ -8,11 +8,24 @@ public abstract class Ship implements Serializable {
     private int length;
     private ArrayList<Point2D> position;
     private String name;
+    private boolean vertical;
 
-    public Ship(String name, int length, ArrayList<Point2D> position) {
+    public Ship(String name, int length, Point2D position, boolean vertical) {
         this.name = name;
         this.length = length;
-        this.position = position;
+        this.position   = new ArrayList<>();
+        this.position.add(position);
+        this.vertical = vertical;
+        if(vertical){
+            for (int i=1; i<length; i++){
+                this.position.add(new Point2D.Double(position.getX(),position.getY()+i));
+            }
+        }
+        else {
+            for (int i=1; i<length; i++){
+                this.position.add(new Point2D.Double(position.getX()+i,position.getY()));
+            }
+        }
     }
 
     public String getName() {
@@ -32,12 +45,7 @@ public abstract class Ship implements Serializable {
     }
 
     public ArrayList<Point2D> getPosition() {
-        return position;
+        return this.position;
     }
-
-    public void setPosition(ArrayList<Point2D> position) {
-        this.position = position;
-    }
-
 
 }

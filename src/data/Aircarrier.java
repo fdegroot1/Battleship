@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 public class Aircarrier extends Ship {
 
-    public Aircarrier(int length, ArrayList<Point2D> position) {
-        super("Aircarrier", length, position);
+    public Aircarrier(int length, Point2D position, boolean vertical) {
+        super("Aircarrier", length, position, vertical);
     }
 
 }
