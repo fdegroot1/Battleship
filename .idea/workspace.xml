@@ -2,19 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="33ad707f-75a4-4f75-a765-0155cb5d1f41" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/client/BattleshipClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Battleship/data/Aircarrier.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Battleship/data/Aircarrier.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Battleship/data/Battleship.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Battleship/data/Battleship.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Battleship/data/Patrolship.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Battleship/data/Patrolship.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Battleship/data/Ship.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Battleship/data/Ship.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Battleship/data/Submarine.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Battleship/data/Submarine.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Battleship/server/ServerClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Battleship/server/ServerClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/Aircarrier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/Aircarrier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/Battleship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/Battleship.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/Patrolship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/Patrolship.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/Ship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/Ship.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/Submarine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/Submarine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/BattleshipClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/BattleshipClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/ServerClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ServerClient.java" afterDir="false" />
     </list>
@@ -95,8 +85,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.BattleshipClient" />
         <item itemvalue="Application.GUIServer" />
+        <item itemvalue="Application.BattleshipClient" />
       </list>
     </recent_temporary>
   </component>
@@ -122,7 +112,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

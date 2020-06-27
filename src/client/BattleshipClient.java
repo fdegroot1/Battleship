@@ -132,6 +132,7 @@ public class BattleshipClient extends Application {
 
     private void receiveInfo() throws IOException, ClassNotFoundException {
         System.out.println("wait for data");
+        Platform.runLater(() -> labelStatus.setText("Waiting for other player"));
         String text = dataInputStream.readUTF();
         System.out.println(text);
 
@@ -168,8 +169,8 @@ public class BattleshipClient extends Application {
     }
 
     private void waitForPlayer() throws InterruptedException {
+        Platform.runLater(() -> labelStatus.setText("Pick a move"));
         while (waiting){
-            System.out.println("waiting");
             Thread.sleep(100);
         }
         waiting = true;

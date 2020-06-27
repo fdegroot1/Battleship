@@ -71,16 +71,16 @@ public class ServerClient implements Runnable {
             while (true){
                 System.out.println("Waiting for point");
                 Point2D positionPlayer1 = (Point2D) objectFromPlayer1.readObject();
-                System.out.println("received");
-
-                System.out.println(positionPlayer1);
+                System.out.println("Received "+positionPlayer1);
 
                 if(isHit(positionPlayer1, player2ships)){
+                    System.out.println("Hit");
                     if(hasWon(player2ships)){
+                        System.out.println("Player 1 won");
                         //dataToPlayer1.writeUTF("Player 1 has won");
                         //dataToPlayer2.writeUTF("Player 1 has won");
-                        break;
                     }
+                    dataToPlayer2.writeUTF("Pick a move");
                 }
                 else{
                     dataToPlayer2.writeUTF("Pick a move");
@@ -94,10 +94,11 @@ public class ServerClient implements Runnable {
 
                 if(isHit(positionPlayer2, player1ships)){
                     if(hasWon(player1ships)){
-                        dataToPlayer1.writeUTF("Player 2 has won");
-                        dataToPlayer2.writeUTF("Player 2 has won");
-                        break;
+                        System.out.println("Player 2 won");
+                        //dataToPlayer1.writeUTF("Player 2 has won");
+                        //dataToPlayer2.writeUTF("Player 2 has won");
                     }
+                    dataToPlayer1.writeUTF("Pick a move");
                 }
                 else {
                     dataToPlayer1.writeUTF("Pick a move");
@@ -115,20 +116,25 @@ public class ServerClient implements Runnable {
 
     private boolean isHit(Point2D position, ArrayList<Ship> list){
         boolean isRemoved = false;
+        Ship hitShip = null;
+        Point2D point2DtoRemove = null;
         for(Ship ship : list){
-            Point2D point2DtoRemove = null;
+
             for(Point2D point2D : ship.getPosition()){
                 if(position.equals(point2D)){
                     point2DtoRemove = point2D;
                     isRemoved = true;
+                    hitShip = ship;
+                    break;
                 }
             }
-            if(isRemoved){
-                ship.getPosition().remove(point2DtoRemove);
-                if(ship.getPosition().isEmpty()){
-                    list.remove(ship);
-                    shipDestroyedMessage(ship);
-                }
+
+        }
+        if(isRemoved){
+            hitShip.getPosition().remove(point2DtoRemove);
+            if(hitShip.getPosition().isEmpty()){
+                list.remove(hitShip);
+                shipDestroyedMessage(hitShip);
             }
         }
         return isRemoved;
@@ -146,11 +152,12 @@ public class ServerClient implements Runnable {
     }
 
     private void shipDestroyedMessage(Ship ship){
-        try {
-            dataToPlayer1.writeUTF(ship.getName()+" destroyed");
-            dataToPlayer2.writeUTF(ship.getName()+" destroyed");
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+//        try {
+            System.out.println("Destroyed");
+            //dataToPlayer1.writeUTF(ship.getName()+" destroyed");
+            //dataToPlayer2.writeUTF(ship.getName()+" destroyed");
+//        }catch (IOException e){
+//            e.printStackTrace();
+//        }
     }
 }
